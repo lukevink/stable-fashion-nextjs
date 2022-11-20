@@ -3,6 +3,6 @@ const isDev =
   (typeof location === "object" && !!location.href.match(/localhost/));
 
   
-const REQUIRE_REGISTRATION = process.env.NEXT_PUBLIC_REQUIRE_REGISTRATION;
+const REQUIRE_REGISTRATION = false;
 
 export { isDev, REQUIRE_REGISTRATION };
