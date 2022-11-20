@@ -6,144 +6,104 @@ import {
   Box,
   Button,
   Container,
-  FormControlLabel,
-  FormGroup,
-  Switch,
-  ToggleButton,
-  ToggleButtonGroup,
+  Unstable_Grid2 as Grid,
   Typography,
 } from "@mui/material";
 
 import Link from "../src/Link";
 import MyAppBar from "../src/MyAppBar";
 import Copyright from "../src/Copyright";
-import { useGongoLive, useGongoSub } from "gongo-client-react";
-import Starred from "../src/Starred";
-import useOver18 from "../src/lib/useOver18";
+import Image from "next/image";
 import { useRouter } from "next/router";
-import { GridView, Splitscreen } from "@mui/icons-material";
-import { NUM_REPORTS_UNTIL_REMOVAL } from "../src/lib/constants";
 
-const Home: NextPage = () => {
+const Start: NextPage = () => {
   const router = useRouter();
 
-  // const [nsfwFilter, setNsfwFilter] = React.useState(true);
-  const nsfwFilter =
-    !router.query.nsfwFilter || router.query.nsfwFilter === "true";
-  const setNsfw = (nsfwFilter: boolean) =>
-    router.replace({ pathname: "/", query: { ...router.query, nsfwFilter } });
-
-  // const [show, setShow] = React.useState("recent");
-  const show = router.query.show || "recent";
-  const setShow = (show: string) =>
-    router.replace({ pathname: "/", query: { ...router.query, show } });
-
-  const over18 = useOver18();
-
-  // const [useGrid, setUseGrid] = React.useState(true);
-  const useGrid = !router.query.useGrid || router.query.useGrid === "true";
-  const setUseGrid = (useGrid: boolean) =>
-    router.replace({ pathname: "/", query: { ...router.query, useGrid } });
-
-  const query: Record<string, unknown> = {};
-  if (!router.query.showDeleted) query.deleted = { $ne: true };
-  if (!router.query.showReported)
-    query.$or = [
-      { reports: { $exists: false } },
-      { reports: { $lt: NUM_REPORTS_UNTIL_REMOVAL } },
-    ];
-  const sortField = show === "recent" ? "date" : "likes";
-  if (nsfwFilter) query["callInputs.safety_checker"] = true;
-
-  const items = useGongoLive(
-    (db) => db.collection("stars").find(query).sort(sortField, "desc") //.limit(100)
-  );
-  useGongoSub("stars");
+  const itemData = [
+    {
+      title: t`Text to Image`,
+      href: "/txt2img",
+      img: "/img/pages/txt2img.png",
+      alt: "txt2img example",
+    },
+    {
+      title: t`Image to Image`,
+      href: "/img2img",
+      img: "/img/pages/img2img.png",
+      alt: "img2img example",
+    },
+    {
+      title: t`Inpainting`,
+      href: "/inpaint",
+      img: "/img/pages/inpaint.png",
+      alt: "inpaint example",
+    },
+    {
+      title: t`Upsampling`,
+      href: "/upsample",
+      img: "/img/pages/upsample.png",
+      alt: "upsample example",
+    },
+  ];
 
   return (
     <>
       <MyAppBar title={t`Home`} />
-      <Container maxWidth="lg" sx={{ my: 2 }}>
-        <Box sx={{ textAlign: "center" }}>
-          <Button variant="contained" component={Link} href="/start">
-            <Trans>Start Creating</Trans>
-          </Button>
-        </Box>
-        <br />
-        <Box sx={{ textAlign: "center" }}>
-          <Typography variant="h6">
-            <Trans>Community</Trans>
+      <Container maxWidth="lg">
+        <Box
+          sx={{
+            my: 2,
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Typography variant="h6" component="h1" gutterBottom>
+            Stable Fashion
           </Typography>
-          <Box sx={{ fontSize: "80%" }}>
-            <Trans>
-              <span style={{ whiteSpace: "nowrap" }}>
-                Star images from your <Link href="/history">history</Link>
-              </span>{" "}
-              <span style={{ whiteSpace: "nowrap" }}>
-                and have them appear here too!
-              </span>
-            </Trans>
-          </Box>
-          <br />
-        </Box>
-        {over18 && (
-          <FormGroup sx={{ alignItems: "center" }}>
-            <FormControlLabel
-              sx={{ mr: 0 }}
-              control={
-                <Switch
-                  checked={nsfwFilter}
-                  onChange={(event) => setNsfw(event.target.checked)}
-                />
-              }
-              label={
-                <Box>
-                  <Trans>NSFW Filter</Trans>
+          <Grid container spacing={2} width="100%">
+            {itemData.map((item) => (
+              <Grid key={item.href} xs={6} sm={4} md={3} lg={3} xl={3}>
+                <Box
+                  sx={{
+                    p: 0,
+                    m: 0,
+                    background: "#eee",
+                    border: "1px solid #aaa",
+                    borderRadius: "12px",
+                    cursor: "pointer",
+                    textAlign: "center",
+                  }}
+                  onClick={() => router.push(item.href)}
+                >
+                  <Image
+                    layout="responsive"
+                    width={150}
+                    height={150}
+                    src={item.img}
+                    alt={item.title}
+                  />
                 </Box>
-              }
-            />
-          </FormGroup>
-        )}
 
-        <Box sx={{ textAlign: "center" }}>
-          <ToggleButtonGroup
-            color="primary"
-            value={show}
-            exclusive
-            size="small"
-            onChange={(_event, newValue) => newValue && setShow(newValue)}
-            aria-label="Platform"
-            sx={{ fontSize: "80%" }}
-          >
-            <ToggleButton value="recent">
-              <Trans>Most Recent</Trans>
-            </ToggleButton>
-            <ToggleButton value="popular">
-              <Trans>Most Popular</Trans>
-            </ToggleButton>
-          </ToggleButtonGroup>{" "}
-          <ToggleButtonGroup
-            color="primary"
-            value={useGrid ? "grid" : "nogrid"}
-            exclusive
-            size="small"
-            onChange={(_event, newValue) => newValue && setUseGrid(!useGrid)}
-            aria-label="Platform"
-            sx={{ fontSize: "80%", position: "relative", top: 7 }}
-          >
-            <ToggleButton value="grid">
-              <GridView sx={{ fontSize: "170%" }} />
-            </ToggleButton>
-            <ToggleButton value="nogrid">
-              <Splitscreen sx={{ fontSize: "170%" }} />
-            </ToggleButton>
-          </ToggleButtonGroup>
+                <Button
+                  fullWidth
+                  component={Link}
+                  href={item.href}
+                  variant="contained"
+                  sx={{ my: 1 }}
+                >
+                  {item.title}
+                </Button>
+              </Grid>
+            ))}
+          </Grid>
         </Box>
-        <Starred items={items} cols={useGrid ? undefined : 1} />
-        <Copyright />
+
+
       </Container>
     </>
   );
 };
 
-export default Home;
+export default Start;

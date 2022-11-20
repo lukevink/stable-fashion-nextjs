@@ -60,7 +60,7 @@ const Start: NextPage = () => {
           }}
         >
           <Typography variant="h6" component="h1" gutterBottom>
-            stable-diffusion-react-nextjs-mui-pwa
+            Stable Fashion
           </Typography>
           <Grid container spacing={2} width="100%">
             {itemData.map((item) => (
@@ -99,97 +99,8 @@ const Start: NextPage = () => {
             ))}
           </Grid>
         </Box>
-        <Box sx={{ my: 1 }}>
-          <p style={{ textAlign: "center", fontWeight: "bold" }}>
-            <Trans>Be Responsible</Trans>
-          </p>
-          <ul>
-            <li>
-              <Trans>
-                Do not create any harmful content (racist, inciteful, etc).
-              </Trans>
-            </li>
-            <li>
-              <Trans>
-                No deepfakes aside for fair use (e.g. humour, education, nothing
-                misleading or political).
-              </Trans>
-            </li>
-            <li>
-              <Trans>
-                You must make clear on any content you share elsewhere that the
-                image is computer generated.
-              </Trans>
-            </li>
-          </ul>
-        </Box>
-        <Box sx={{ my: 1 }}>
-          <p style={{ textAlign: "center", fontWeight: "bold" }}>
-            <Trans>Project Goals</Trans>
-          </p>
-          <ol>
-            <li>
-              <b>
-                <Trans>Super simple, easy to share.</Trans>
-              </b>{" "}
-              <Trans>
-                Zero setup, mobile-first. Easy for anyone - no matter their tech
-                experience - to have access to this technology, and be able to
-                play around and get excited about it.
-              </Trans>
-            </li>
-            <br />
-            <li>
-              <b>
-                <Trans>Open Source, developer friendly.</Trans>
-              </b>{" "}
-              <Trans>
-                Transparent development and easy for developers to get involved.
-                Especially web devs without any prior background in Machine
-                Learning.
-              </Trans>
-            </li>
-          </ol>
-        </Box>
-        <Box
-          sx={{
-            p: 1,
-            mb: 1,
-            border: "1px solid #aaa",
-            borderRadius: "5px",
-            fontSize: "90%",
-          }}
-        >
-          <Trans>
-            This project is based on Free and Open Source Software. You can run
-            it on your own computer for free (if you have a suitable GPU, or
-            with your own Banana serverless GPU account). Want to get involved?
-            See the <Link href="/about">about</Link> page.
-          </Trans>
-        </Box>{" "}
-        <Box sx={{ fontSize: "80%", mb: 2 }}>
-          <b>
-            <Trans>Terms of Service</Trans>
-          </b>
-          :{" "}
-          <Trans>
-            1) Use at your own risk, we assume no responsibilty for any
-            consequences as a result of your use (or misuse) of this project. 2)
-            Any use of this site or project implies acceptance of its terms, and
-            rules, including the &quot;be responsible&quot; rules above, Stable
-            Diffusion&apos;s{" "}
-            <a href="https://huggingface.co/spaces/CompVis/stable-diffusion-license">
-              CreativeML Open RAIL-M license
-            </a>
-            , and this project&apos;s{" "}
-            <a href="https://github.com/gadicc/stable-diffusion-react-nextjs-mui-pwa/blob/main/LICENSE.txt">
-              MIT license
-            </a>
-            .
-          </Trans>
-          <Trans>Read the full Terms of Service below.</Trans>
-        </Box>
-        <Copyright />
+
+
       </Container>
     </>
   );
