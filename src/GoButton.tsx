@@ -40,7 +40,7 @@ export default function GoButton({
             fullWidth
             sx={{ my: 1 }}
             type="submit"
-            // disabled={disabled}
+            disabled={disabled}
           >
              <Trans>Go</Trans>
             {/* {(function () {
@@ -53,7 +53,7 @@ export default function GoButton({
               );
             })()} */}
           </Button>
-          {/* {REQUIRE_REGISTRATION && user && (
+          {REQUIRE_REGISTRATION && user && (
             <Box
               sx={{
                 fontSize: "70%",
@@ -69,7 +69,7 @@ export default function GoButton({
                 other="# credits remaining"
               />
             </Box>
-          )} */}
+          )}
         </Grid>
         {isDev && (
           <Grid item xs={5} sm={4} md={3} sx={{ pl: 1, pt: 1 }}>
