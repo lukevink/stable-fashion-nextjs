@@ -42,8 +42,7 @@ export default function GoButton({
             type="submit"
             disabled={disabled}
           >
-             <Trans>Go</Trans>
-            {/* {(function () {
+            {(function () {
               if (!REQUIRE_REGISTRATION) return <Trans>Go</Trans>;
               if (!user) return <Trans>Login</Trans>;
               if (!(userCredits && userCredits > credits))
@@ -51,7 +50,7 @@ export default function GoButton({
               return (
                 <Plural value={credits} one="# Credit" other="# Credits" />
               );
-            })()} */}
+            })()}
           </Button>
           {REQUIRE_REGISTRATION && user && (
             <Box
