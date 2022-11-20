@@ -1,6 +1,6 @@
 import * as React from "react";
 import type { NextPage } from "next";
-import { t, Trans } from "@lingui/macro";
+import { t } from "@lingui/macro";
 
 import {
   Box,
@@ -12,7 +12,6 @@ import {
 
 import Link from "../src/Link";
 import MyAppBar from "../src/MyAppBar";
-import Copyright from "../src/Copyright";
 import Image from "next/image";
 import { useRouter } from "next/router";
 
